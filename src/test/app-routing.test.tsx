@@ -14,4 +14,23 @@ describe("App routing", () => {
 
     expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
   });
+
+  it("matches /dashboard/abonnement correctly", () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    const matches = router.matchRoutes("/dashboard/abonnement");
+    expect(matches.at(-1)?.routeId).toBe("/_authenticated/dashboard/abonnement");
+  });
+
+  it("matches legal and public pages correctly", () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    expect(router.matchRoutes("/data-deletion").at(-1)?.routeId).toBe("/data-deletion");
+    expect(router.matchRoutes("/privacy").at(-1)?.routeId).toBe("/privacy");
+    expect(router.matchRoutes("/terms").at(-1)?.routeId).toBe("/terms");
+  });
+
+  it("matches /admin/demandes-suppression correctly", () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    const matches = router.matchRoutes("/admin/demandes-suppression");
+    expect(matches.at(-1)?.routeId).toBe("/_authenticated/admin/demandes-suppression");
+  });
 });

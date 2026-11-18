@@ -10,33 +10,579 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as DataDeletionRouteImport } from './routes/data-deletion'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AbonnementRetourRouteImport } from './routes/abonnement.retour'
+import { Route as BSlugRouteImport } from './routes/b.$slug'
+import { Route as RobotsTxtRouteImport } from './routes/robots.txt'
+import { Route as SitemapXmlRouteImport } from './routes/sitemap.xml'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminBoutiquesRouteImport } from './routes/_authenticated/admin.boutiques'
+import { Route as AuthenticatedAdminCommercantsRouteImport } from './routes/_authenticated/admin.commercants'
+import { Route as AuthenticatedAdminDemandesSuppressionRouteImport } from './routes/_authenticated/admin.demandes-suppression'
+import { Route as AuthenticatedAdminPaiementsRouteImport } from './routes/_authenticated/admin.paiements'
+import { Route as AuthenticatedAdminParametresRouteImport } from './routes/_authenticated/admin.parametres'
+import { Route as AuthenticatedAdminPlansRouteImport } from './routes/_authenticated/admin.plans'
+import { Route as AuthenticatedAdminSupportRouteImport } from './routes/_authenticated/admin.support'
+import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
+import { Route as AuthenticatedDashboardAbonnementRouteImport } from './routes/_authenticated/dashboard.abonnement'
+import { Route as AuthenticatedDashboardBoutiqueRouteImport } from './routes/_authenticated/dashboard.boutique'
+import { Route as AuthenticatedDashboardCommandesRouteImport } from './routes/_authenticated/dashboard.commandes'
+import { Route as AuthenticatedDashboardProduitsRouteImport } from './routes/_authenticated/dashboard.produits'
+import { Route as AuthenticatedDashboardPromotionsRouteImport } from './routes/_authenticated/dashboard.promotions'
+import { Route as AuthenticatedDashboardReglagesRouteImport } from './routes/_authenticated/dashboard.reglages'
+import { Route as AuthenticatedDashboardSupportRouteImport } from './routes/_authenticated/dashboard.support'
+import { Route as ApiCronProcessAccountDeletionsRouteImport } from './routes/api/cron/process-account-deletions'
+import { Route as ApiCronSubscriptionRemindersRouteImport } from './routes/api/cron/subscription-reminders'
+import { Route as ApiPublicBroadcastTrackRouteImport } from './routes/api/public/broadcast-track'
+import { Route as ApiPublicInvoicePdfRouteImport } from './routes/api/public/invoice-pdf'
+import { Route as ApiPublicWebhookSaspayRouteImport } from './routes/api/public/webhook-saspay'
+import { Route as BSlugIndexRouteImport } from './routes/b.$slug.index'
+import { Route as AuthenticatedAdminBoutiquesShopIdRouteImport } from './routes/_authenticated/admin.boutiques_.$shopId'
+import { Route as AuthenticatedAdminSupportTicketIdRouteImport } from './routes/_authenticated/admin.support_.$ticketId'
+import { Route as AuthenticatedDashboardCommandesOrderIdRouteImport } from './routes/_authenticated/dashboard.commandes_.$orderId'
+import { Route as AuthenticatedDashboardSupportNouveauRouteImport } from './routes/_authenticated/dashboard.support.nouveau'
+import { Route as AuthenticatedDashboardSupportTicketIdRouteImport } from './routes/_authenticated/dashboard.support_.$ticketId'
+import { Route as ApiPublicMediaSplatRouteImport } from './routes/api/public/media/$'
+import { Route as BSlugPProductIdRouteImport } from './routes/b.$slug.p.$productId'
+import { Route as BSlugPromoPromoIdRouteImport } from './routes/b.$slug.promo.$promoId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataDeletionRoute = DataDeletionRouteImport.update({
+  id: '/data-deletion',
+  path: '/data-deletion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AbonnementRetourRoute = AbonnementRetourRouteImport.update({
+  id: '/abonnement/retour',
+  path: '/abonnement/retour',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BSlugRoute = BSlugRouteImport.update({
+  id: '/b/$slug',
+  path: '/b/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsTxtRoute = RobotsTxtRouteImport.update({
+  id: '/robots/txt',
+  path: '/robots/txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapXmlRoute = SitemapXmlRouteImport.update({
+  id: '/sitemap/xml',
+  path: '/sitemap/xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminBoutiquesRoute =
+  AuthenticatedAdminBoutiquesRouteImport.update({
+    id: '/boutiques',
+    path: '/boutiques',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminCommercantsRoute =
+  AuthenticatedAdminCommercantsRouteImport.update({
+    id: '/commercants',
+    path: '/commercants',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminDemandesSuppressionRoute =
+  AuthenticatedAdminDemandesSuppressionRouteImport.update({
+    id: '/demandes-suppression',
+    path: '/demandes-suppression',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminPaiementsRoute =
+  AuthenticatedAdminPaiementsRouteImport.update({
+    id: '/paiements',
+    path: '/paiements',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminParametresRoute =
+  AuthenticatedAdminParametresRouteImport.update({
+    id: '/parametres',
+    path: '/parametres',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminPlansRoute = AuthenticatedAdminPlansRouteImport.update({
+  id: '/plans',
+  path: '/plans',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminSupportRoute =
+  AuthenticatedAdminSupportRouteImport.update({
+    id: '/support',
+    path: '/support',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedDashboardIndexRoute =
+  AuthenticatedDashboardIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardAbonnementRoute =
+  AuthenticatedDashboardAbonnementRouteImport.update({
+    id: '/abonnement',
+    path: '/abonnement',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardBoutiqueRoute =
+  AuthenticatedDashboardBoutiqueRouteImport.update({
+    id: '/boutique',
+    path: '/boutique',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardCommandesRoute =
+  AuthenticatedDashboardCommandesRouteImport.update({
+    id: '/commandes',
+    path: '/commandes',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardProduitsRoute =
+  AuthenticatedDashboardProduitsRouteImport.update({
+    id: '/produits',
+    path: '/produits',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardPromotionsRoute =
+  AuthenticatedDashboardPromotionsRouteImport.update({
+    id: '/promotions',
+    path: '/promotions',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardReglagesRoute =
+  AuthenticatedDashboardReglagesRouteImport.update({
+    id: '/reglages',
+    path: '/reglages',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardSupportRoute =
+  AuthenticatedDashboardSupportRouteImport.update({
+    id: '/support',
+    path: '/support',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const ApiCronProcessAccountDeletionsRoute =
+  ApiCronProcessAccountDeletionsRouteImport.update({
+    id: '/api/cron/process-account-deletions',
+    path: '/api/cron/process-account-deletions',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiCronSubscriptionRemindersRoute =
+  ApiCronSubscriptionRemindersRouteImport.update({
+    id: '/api/cron/subscription-reminders',
+    path: '/api/cron/subscription-reminders',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicBroadcastTrackRoute = ApiPublicBroadcastTrackRouteImport.update({
+  id: '/api/public/broadcast-track',
+  path: '/api/public/broadcast-track',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicInvoicePdfRoute = ApiPublicInvoicePdfRouteImport.update({
+  id: '/api/public/invoice-pdf',
+  path: '/api/public/invoice-pdf',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicWebhookSaspayRoute = ApiPublicWebhookSaspayRouteImport.update({
+  id: '/api/public/webhook-saspay',
+  path: '/api/public/webhook-saspay',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BSlugIndexRoute = BSlugIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BSlugRoute,
+} as any)
+const AuthenticatedAdminBoutiquesShopIdRoute =
+  AuthenticatedAdminBoutiquesShopIdRouteImport.update({
+    id: '/boutiques_/$shopId',
+    path: '/boutiques/$shopId',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminSupportTicketIdRoute =
+  AuthenticatedAdminSupportTicketIdRouteImport.update({
+    id: '/support_/$ticketId',
+    path: '/support/$ticketId',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedDashboardCommandesOrderIdRoute =
+  AuthenticatedDashboardCommandesOrderIdRouteImport.update({
+    id: '/commandes_/$orderId',
+    path: '/commandes/$orderId',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardSupportNouveauRoute =
+  AuthenticatedDashboardSupportNouveauRouteImport.update({
+    id: '/nouveau',
+    path: '/nouveau',
+    getParentRoute: () => AuthenticatedDashboardSupportRoute,
+  } as any)
+const AuthenticatedDashboardSupportTicketIdRoute =
+  AuthenticatedDashboardSupportTicketIdRouteImport.update({
+    id: '/support_/$ticketId',
+    path: '/support/$ticketId',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const ApiPublicMediaSplatRoute = ApiPublicMediaSplatRouteImport.update({
+  id: '/api/public/media/$',
+  path: '/api/public/media/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BSlugPProductIdRoute = BSlugPProductIdRouteImport.update({
+  id: '/p/$productId',
+  path: '/p/$productId',
+  getParentRoute: () => BSlugRoute,
+} as any)
+const BSlugPromoPromoIdRoute = BSlugPromoPromoIdRouteImport.update({
+  id: '/promo/$promoId',
+  path: '/promo/$promoId',
+  getParentRoute: () => BSlugRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/data-deletion': typeof DataDeletionRoute
+  '/privacy': typeof PrivacyRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/terms': typeof TermsRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
+  '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/abonnement/retour': typeof AbonnementRetourRoute
+  '/b/$slug': typeof BSlugRouteWithChildren
+  '/robots/txt': typeof RobotsTxtRoute
+  '/sitemap/xml': typeof SitemapXmlRoute
+  '/admin/boutiques': typeof AuthenticatedAdminBoutiquesRoute
+  '/admin/commercants': typeof AuthenticatedAdminCommercantsRoute
+  '/admin/demandes-suppression': typeof AuthenticatedAdminDemandesSuppressionRoute
+  '/admin/paiements': typeof AuthenticatedAdminPaiementsRoute
+  '/admin/parametres': typeof AuthenticatedAdminParametresRoute
+  '/admin/plans': typeof AuthenticatedAdminPlansRoute
+  '/admin/support': typeof AuthenticatedAdminSupportRoute
+  '/dashboard/abonnement': typeof AuthenticatedDashboardAbonnementRoute
+  '/dashboard/boutique': typeof AuthenticatedDashboardBoutiqueRoute
+  '/dashboard/commandes': typeof AuthenticatedDashboardCommandesRoute
+  '/dashboard/produits': typeof AuthenticatedDashboardProduitsRoute
+  '/dashboard/promotions': typeof AuthenticatedDashboardPromotionsRoute
+  '/dashboard/reglages': typeof AuthenticatedDashboardReglagesRoute
+  '/dashboard/support': typeof AuthenticatedDashboardSupportRouteWithChildren
+  '/api/cron/process-account-deletions': typeof ApiCronProcessAccountDeletionsRoute
+  '/api/cron/subscription-reminders': typeof ApiCronSubscriptionRemindersRoute
+  '/api/public/broadcast-track': typeof ApiPublicBroadcastTrackRoute
+  '/api/public/invoice-pdf': typeof ApiPublicInvoicePdfRoute
+  '/api/public/webhook-saspay': typeof ApiPublicWebhookSaspayRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/b/$slug/': typeof BSlugIndexRoute
+  '/admin/boutiques/$shopId': typeof AuthenticatedAdminBoutiquesShopIdRoute
+  '/admin/support/$ticketId': typeof AuthenticatedAdminSupportTicketIdRoute
+  '/dashboard/commandes/$orderId': typeof AuthenticatedDashboardCommandesOrderIdRoute
+  '/dashboard/support/nouveau': typeof AuthenticatedDashboardSupportNouveauRoute
+  '/dashboard/support/$ticketId': typeof AuthenticatedDashboardSupportTicketIdRoute
+  '/api/public/media/$': typeof ApiPublicMediaSplatRoute
+  '/b/$slug/p/$productId': typeof BSlugPProductIdRoute
+  '/b/$slug/promo/$promoId': typeof BSlugPromoPromoIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/data-deletion': typeof DataDeletionRoute
+  '/privacy': typeof PrivacyRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/terms': typeof TermsRoute
+  '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/abonnement/retour': typeof AbonnementRetourRoute
+  '/robots/txt': typeof RobotsTxtRoute
+  '/sitemap/xml': typeof SitemapXmlRoute
+  '/admin/boutiques': typeof AuthenticatedAdminBoutiquesRoute
+  '/admin/commercants': typeof AuthenticatedAdminCommercantsRoute
+  '/admin/demandes-suppression': typeof AuthenticatedAdminDemandesSuppressionRoute
+  '/admin/paiements': typeof AuthenticatedAdminPaiementsRoute
+  '/admin/parametres': typeof AuthenticatedAdminParametresRoute
+  '/admin/plans': typeof AuthenticatedAdminPlansRoute
+  '/admin/support': typeof AuthenticatedAdminSupportRoute
+  '/dashboard/abonnement': typeof AuthenticatedDashboardAbonnementRoute
+  '/dashboard/boutique': typeof AuthenticatedDashboardBoutiqueRoute
+  '/dashboard/commandes': typeof AuthenticatedDashboardCommandesRoute
+  '/dashboard/produits': typeof AuthenticatedDashboardProduitsRoute
+  '/dashboard/promotions': typeof AuthenticatedDashboardPromotionsRoute
+  '/dashboard/reglages': typeof AuthenticatedDashboardReglagesRoute
+  '/dashboard/support': typeof AuthenticatedDashboardSupportRouteWithChildren
+  '/api/cron/process-account-deletions': typeof ApiCronProcessAccountDeletionsRoute
+  '/api/cron/subscription-reminders': typeof ApiCronSubscriptionRemindersRoute
+  '/api/public/broadcast-track': typeof ApiPublicBroadcastTrackRoute
+  '/api/public/invoice-pdf': typeof ApiPublicInvoicePdfRoute
+  '/api/public/webhook-saspay': typeof ApiPublicWebhookSaspayRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
+  '/dashboard': typeof AuthenticatedDashboardIndexRoute
+  '/b/$slug': typeof BSlugIndexRoute
+  '/admin/boutiques/$shopId': typeof AuthenticatedAdminBoutiquesShopIdRoute
+  '/admin/support/$ticketId': typeof AuthenticatedAdminSupportTicketIdRoute
+  '/dashboard/commandes/$orderId': typeof AuthenticatedDashboardCommandesOrderIdRoute
+  '/dashboard/support/nouveau': typeof AuthenticatedDashboardSupportNouveauRoute
+  '/dashboard/support/$ticketId': typeof AuthenticatedDashboardSupportTicketIdRoute
+  '/api/public/media/$': typeof ApiPublicMediaSplatRoute
+  '/b/$slug/p/$productId': typeof BSlugPProductIdRoute
+  '/b/$slug/promo/$promoId': typeof BSlugPromoPromoIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/data-deletion': typeof DataDeletionRoute
+  '/privacy': typeof PrivacyRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/terms': typeof TermsRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
+  '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/abonnement/retour': typeof AbonnementRetourRoute
+  '/b/$slug': typeof BSlugRouteWithChildren
+  '/robots/txt': typeof RobotsTxtRoute
+  '/sitemap/xml': typeof SitemapXmlRoute
+  '/_authenticated/admin/boutiques': typeof AuthenticatedAdminBoutiquesRoute
+  '/_authenticated/admin/commercants': typeof AuthenticatedAdminCommercantsRoute
+  '/_authenticated/admin/demandes-suppression': typeof AuthenticatedAdminDemandesSuppressionRoute
+  '/_authenticated/admin/paiements': typeof AuthenticatedAdminPaiementsRoute
+  '/_authenticated/admin/parametres': typeof AuthenticatedAdminParametresRoute
+  '/_authenticated/admin/plans': typeof AuthenticatedAdminPlansRoute
+  '/_authenticated/admin/support': typeof AuthenticatedAdminSupportRoute
+  '/_authenticated/dashboard/abonnement': typeof AuthenticatedDashboardAbonnementRoute
+  '/_authenticated/dashboard/boutique': typeof AuthenticatedDashboardBoutiqueRoute
+  '/_authenticated/dashboard/commandes': typeof AuthenticatedDashboardCommandesRoute
+  '/_authenticated/dashboard/produits': typeof AuthenticatedDashboardProduitsRoute
+  '/_authenticated/dashboard/promotions': typeof AuthenticatedDashboardPromotionsRoute
+  '/_authenticated/dashboard/reglages': typeof AuthenticatedDashboardReglagesRoute
+  '/_authenticated/dashboard/support': typeof AuthenticatedDashboardSupportRouteWithChildren
+  '/api/cron/process-account-deletions': typeof ApiCronProcessAccountDeletionsRoute
+  '/api/cron/subscription-reminders': typeof ApiCronSubscriptionRemindersRoute
+  '/api/public/broadcast-track': typeof ApiPublicBroadcastTrackRoute
+  '/api/public/invoice-pdf': typeof ApiPublicInvoicePdfRoute
+  '/api/public/webhook-saspay': typeof ApiPublicWebhookSaspayRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/b/$slug/': typeof BSlugIndexRoute
+  '/_authenticated/admin/boutiques_/$shopId': typeof AuthenticatedAdminBoutiquesShopIdRoute
+  '/_authenticated/admin/support_/$ticketId': typeof AuthenticatedAdminSupportTicketIdRoute
+  '/_authenticated/dashboard/commandes_/$orderId': typeof AuthenticatedDashboardCommandesOrderIdRoute
+  '/_authenticated/dashboard/support/nouveau': typeof AuthenticatedDashboardSupportNouveauRoute
+  '/_authenticated/dashboard/support_/$ticketId': typeof AuthenticatedDashboardSupportTicketIdRoute
+  '/api/public/media/$': typeof ApiPublicMediaSplatRoute
+  '/b/$slug/p/$productId': typeof BSlugPProductIdRoute
+  '/b/$slug/promo/$promoId': typeof BSlugPromoPromoIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/data-deletion'
+    | '/privacy'
+    | '/reset-password'
+    | '/terms'
+    | '/admin'
+    | '/dashboard'
+    | '/onboarding'
+    | '/abonnement/retour'
+    | '/b/$slug'
+    | '/robots/txt'
+    | '/sitemap/xml'
+    | '/admin/boutiques'
+    | '/admin/commercants'
+    | '/admin/demandes-suppression'
+    | '/admin/paiements'
+    | '/admin/parametres'
+    | '/admin/plans'
+    | '/admin/support'
+    | '/dashboard/abonnement'
+    | '/dashboard/boutique'
+    | '/dashboard/commandes'
+    | '/dashboard/produits'
+    | '/dashboard/promotions'
+    | '/dashboard/reglages'
+    | '/dashboard/support'
+    | '/api/cron/process-account-deletions'
+    | '/api/cron/subscription-reminders'
+    | '/api/public/broadcast-track'
+    | '/api/public/invoice-pdf'
+    | '/api/public/webhook-saspay'
+    | '/admin/'
+    | '/dashboard/'
+    | '/b/$slug/'
+    | '/admin/boutiques/$shopId'
+    | '/admin/support/$ticketId'
+    | '/dashboard/commandes/$orderId'
+    | '/dashboard/support/nouveau'
+    | '/dashboard/support/$ticketId'
+    | '/api/public/media/$'
+    | '/b/$slug/p/$productId'
+    | '/b/$slug/promo/$promoId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/data-deletion'
+    | '/privacy'
+    | '/reset-password'
+    | '/terms'
+    | '/onboarding'
+    | '/abonnement/retour'
+    | '/robots/txt'
+    | '/sitemap/xml'
+    | '/admin/boutiques'
+    | '/admin/commercants'
+    | '/admin/demandes-suppression'
+    | '/admin/paiements'
+    | '/admin/parametres'
+    | '/admin/plans'
+    | '/admin/support'
+    | '/dashboard/abonnement'
+    | '/dashboard/boutique'
+    | '/dashboard/commandes'
+    | '/dashboard/produits'
+    | '/dashboard/promotions'
+    | '/dashboard/reglages'
+    | '/dashboard/support'
+    | '/api/cron/process-account-deletions'
+    | '/api/cron/subscription-reminders'
+    | '/api/public/broadcast-track'
+    | '/api/public/invoice-pdf'
+    | '/api/public/webhook-saspay'
+    | '/admin'
+    | '/dashboard'
+    | '/b/$slug'
+    | '/admin/boutiques/$shopId'
+    | '/admin/support/$ticketId'
+    | '/dashboard/commandes/$orderId'
+    | '/dashboard/support/nouveau'
+    | '/dashboard/support/$ticketId'
+    | '/api/public/media/$'
+    | '/b/$slug/p/$productId'
+    | '/b/$slug/promo/$promoId'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/data-deletion'
+    | '/privacy'
+    | '/reset-password'
+    | '/terms'
+    | '/_authenticated/admin'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/onboarding'
+    | '/abonnement/retour'
+    | '/b/$slug'
+    | '/robots/txt'
+    | '/sitemap/xml'
+    | '/_authenticated/admin/boutiques'
+    | '/_authenticated/admin/commercants'
+    | '/_authenticated/admin/demandes-suppression'
+    | '/_authenticated/admin/paiements'
+    | '/_authenticated/admin/parametres'
+    | '/_authenticated/admin/plans'
+    | '/_authenticated/admin/support'
+    | '/_authenticated/dashboard/abonnement'
+    | '/_authenticated/dashboard/boutique'
+    | '/_authenticated/dashboard/commandes'
+    | '/_authenticated/dashboard/produits'
+    | '/_authenticated/dashboard/promotions'
+    | '/_authenticated/dashboard/reglages'
+    | '/_authenticated/dashboard/support'
+    | '/api/cron/process-account-deletions'
+    | '/api/cron/subscription-reminders'
+    | '/api/public/broadcast-track'
+    | '/api/public/invoice-pdf'
+    | '/api/public/webhook-saspay'
+    | '/_authenticated/admin/'
+    | '/_authenticated/dashboard/'
+    | '/b/$slug/'
+    | '/_authenticated/admin/boutiques_/$shopId'
+    | '/_authenticated/admin/support_/$ticketId'
+    | '/_authenticated/dashboard/commandes_/$orderId'
+    | '/_authenticated/dashboard/support/nouveau'
+    | '/_authenticated/dashboard/support_/$ticketId'
+    | '/api/public/media/$'
+    | '/b/$slug/p/$productId'
+    | '/b/$slug/promo/$promoId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  DataDeletionRoute: typeof DataDeletionRoute
+  PrivacyRoute: typeof PrivacyRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  TermsRoute: typeof TermsRoute
+  AbonnementRetourRoute: typeof AbonnementRetourRoute
+  BSlugRoute: typeof BSlugRouteWithChildren
+  RobotsTxtRoute: typeof RobotsTxtRoute
+  SitemapXmlRoute: typeof SitemapXmlRoute
+  ApiCronProcessAccountDeletionsRoute: typeof ApiCronProcessAccountDeletionsRoute
+  ApiCronSubscriptionRemindersRoute: typeof ApiCronSubscriptionRemindersRoute
+  ApiPublicBroadcastTrackRoute: typeof ApiPublicBroadcastTrackRoute
+  ApiPublicInvoicePdfRoute: typeof ApiPublicInvoicePdfRoute
+  ApiPublicWebhookSaspayRoute: typeof ApiPublicWebhookSaspayRoute
+  ApiPublicMediaSplatRoute: typeof ApiPublicMediaSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +594,441 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data-deletion': {
+      id: '/data-deletion'
+      path: '/data-deletion'
+      fullPath: '/data-deletion'
+      preLoaderRoute: typeof DataDeletionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/onboarding': {
+      id: '/_authenticated/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/abonnement/retour': {
+      id: '/abonnement/retour'
+      path: '/abonnement/retour'
+      fullPath: '/abonnement/retour'
+      preLoaderRoute: typeof AbonnementRetourRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/b/$slug': {
+      id: '/b/$slug'
+      path: '/b/$slug'
+      fullPath: '/b/$slug'
+      preLoaderRoute: typeof BSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots/txt': {
+      id: '/robots/txt'
+      path: '/robots/txt'
+      fullPath: '/robots/txt'
+      preLoaderRoute: typeof RobotsTxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap/xml': {
+      id: '/sitemap/xml'
+      path: '/sitemap/xml'
+      fullPath: '/sitemap/xml'
+      preLoaderRoute: typeof SitemapXmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/boutiques': {
+      id: '/_authenticated/admin/boutiques'
+      path: '/boutiques'
+      fullPath: '/admin/boutiques'
+      preLoaderRoute: typeof AuthenticatedAdminBoutiquesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/commercants': {
+      id: '/_authenticated/admin/commercants'
+      path: '/commercants'
+      fullPath: '/admin/commercants'
+      preLoaderRoute: typeof AuthenticatedAdminCommercantsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/demandes-suppression': {
+      id: '/_authenticated/admin/demandes-suppression'
+      path: '/demandes-suppression'
+      fullPath: '/admin/demandes-suppression'
+      preLoaderRoute: typeof AuthenticatedAdminDemandesSuppressionRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/paiements': {
+      id: '/_authenticated/admin/paiements'
+      path: '/paiements'
+      fullPath: '/admin/paiements'
+      preLoaderRoute: typeof AuthenticatedAdminPaiementsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/parametres': {
+      id: '/_authenticated/admin/parametres'
+      path: '/parametres'
+      fullPath: '/admin/parametres'
+      preLoaderRoute: typeof AuthenticatedAdminParametresRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/plans': {
+      id: '/_authenticated/admin/plans'
+      path: '/plans'
+      fullPath: '/admin/plans'
+      preLoaderRoute: typeof AuthenticatedAdminPlansRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/support': {
+      id: '/_authenticated/admin/support'
+      path: '/support'
+      fullPath: '/admin/support'
+      preLoaderRoute: typeof AuthenticatedAdminSupportRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/dashboard/': {
+      id: '/_authenticated/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/abonnement': {
+      id: '/_authenticated/dashboard/abonnement'
+      path: '/abonnement'
+      fullPath: '/dashboard/abonnement'
+      preLoaderRoute: typeof AuthenticatedDashboardAbonnementRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/boutique': {
+      id: '/_authenticated/dashboard/boutique'
+      path: '/boutique'
+      fullPath: '/dashboard/boutique'
+      preLoaderRoute: typeof AuthenticatedDashboardBoutiqueRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/commandes': {
+      id: '/_authenticated/dashboard/commandes'
+      path: '/commandes'
+      fullPath: '/dashboard/commandes'
+      preLoaderRoute: typeof AuthenticatedDashboardCommandesRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/produits': {
+      id: '/_authenticated/dashboard/produits'
+      path: '/produits'
+      fullPath: '/dashboard/produits'
+      preLoaderRoute: typeof AuthenticatedDashboardProduitsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/promotions': {
+      id: '/_authenticated/dashboard/promotions'
+      path: '/promotions'
+      fullPath: '/dashboard/promotions'
+      preLoaderRoute: typeof AuthenticatedDashboardPromotionsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/reglages': {
+      id: '/_authenticated/dashboard/reglages'
+      path: '/reglages'
+      fullPath: '/dashboard/reglages'
+      preLoaderRoute: typeof AuthenticatedDashboardReglagesRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/support': {
+      id: '/_authenticated/dashboard/support'
+      path: '/support'
+      fullPath: '/dashboard/support'
+      preLoaderRoute: typeof AuthenticatedDashboardSupportRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/api/cron/process-account-deletions': {
+      id: '/api/cron/process-account-deletions'
+      path: '/api/cron/process-account-deletions'
+      fullPath: '/api/cron/process-account-deletions'
+      preLoaderRoute: typeof ApiCronProcessAccountDeletionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/cron/subscription-reminders': {
+      id: '/api/cron/subscription-reminders'
+      path: '/api/cron/subscription-reminders'
+      fullPath: '/api/cron/subscription-reminders'
+      preLoaderRoute: typeof ApiCronSubscriptionRemindersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/broadcast-track': {
+      id: '/api/public/broadcast-track'
+      path: '/api/public/broadcast-track'
+      fullPath: '/api/public/broadcast-track'
+      preLoaderRoute: typeof ApiPublicBroadcastTrackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/invoice-pdf': {
+      id: '/api/public/invoice-pdf'
+      path: '/api/public/invoice-pdf'
+      fullPath: '/api/public/invoice-pdf'
+      preLoaderRoute: typeof ApiPublicInvoicePdfRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/webhook-saspay': {
+      id: '/api/public/webhook-saspay'
+      path: '/api/public/webhook-saspay'
+      fullPath: '/api/public/webhook-saspay'
+      preLoaderRoute: typeof ApiPublicWebhookSaspayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/b/$slug/': {
+      id: '/b/$slug/'
+      path: '/'
+      fullPath: '/b/$slug/'
+      preLoaderRoute: typeof BSlugIndexRouteImport
+      parentRoute: typeof BSlugRoute
+    }
+    '/_authenticated/admin/boutiques_/$shopId': {
+      id: '/_authenticated/admin/boutiques_/$shopId'
+      path: '/boutiques/$shopId'
+      fullPath: '/admin/boutiques/$shopId'
+      preLoaderRoute: typeof AuthenticatedAdminBoutiquesShopIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/support_/$ticketId': {
+      id: '/_authenticated/admin/support_/$ticketId'
+      path: '/support/$ticketId'
+      fullPath: '/admin/support/$ticketId'
+      preLoaderRoute: typeof AuthenticatedAdminSupportTicketIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/dashboard/commandes_/$orderId': {
+      id: '/_authenticated/dashboard/commandes_/$orderId'
+      path: '/commandes/$orderId'
+      fullPath: '/dashboard/commandes/$orderId'
+      preLoaderRoute: typeof AuthenticatedDashboardCommandesOrderIdRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/support/nouveau': {
+      id: '/_authenticated/dashboard/support/nouveau'
+      path: '/nouveau'
+      fullPath: '/dashboard/support/nouveau'
+      preLoaderRoute: typeof AuthenticatedDashboardSupportNouveauRouteImport
+      parentRoute: typeof AuthenticatedDashboardSupportRoute
+    }
+    '/_authenticated/dashboard/support_/$ticketId': {
+      id: '/_authenticated/dashboard/support_/$ticketId'
+      path: '/support/$ticketId'
+      fullPath: '/dashboard/support/$ticketId'
+      preLoaderRoute: typeof AuthenticatedDashboardSupportTicketIdRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/api/public/media/$': {
+      id: '/api/public/media/$'
+      path: '/api/public/media/$'
+      fullPath: '/api/public/media/$'
+      preLoaderRoute: typeof ApiPublicMediaSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/b/$slug/p/$productId': {
+      id: '/b/$slug/p/$productId'
+      path: '/p/$productId'
+      fullPath: '/b/$slug/p/$productId'
+      preLoaderRoute: typeof BSlugPProductIdRouteImport
+      parentRoute: typeof BSlugRoute
+    }
+    '/b/$slug/promo/$promoId': {
+      id: '/b/$slug/promo/$promoId'
+      path: '/promo/$promoId'
+      fullPath: '/b/$slug/promo/$promoId'
+      preLoaderRoute: typeof BSlugPromoPromoIdRouteImport
+      parentRoute: typeof BSlugRoute
+    }
   }
 }
 
+interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminBoutiquesRoute: typeof AuthenticatedAdminBoutiquesRoute
+  AuthenticatedAdminCommercantsRoute: typeof AuthenticatedAdminCommercantsRoute
+  AuthenticatedAdminDemandesSuppressionRoute: typeof AuthenticatedAdminDemandesSuppressionRoute
+  AuthenticatedAdminPaiementsRoute: typeof AuthenticatedAdminPaiementsRoute
+  AuthenticatedAdminParametresRoute: typeof AuthenticatedAdminParametresRoute
+  AuthenticatedAdminPlansRoute: typeof AuthenticatedAdminPlansRoute
+  AuthenticatedAdminSupportRoute: typeof AuthenticatedAdminSupportRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminBoutiquesShopIdRoute: typeof AuthenticatedAdminBoutiquesShopIdRoute
+  AuthenticatedAdminSupportTicketIdRoute: typeof AuthenticatedAdminSupportTicketIdRoute
+}
+
+const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminBoutiquesRoute: AuthenticatedAdminBoutiquesRoute,
+  AuthenticatedAdminCommercantsRoute: AuthenticatedAdminCommercantsRoute,
+  AuthenticatedAdminDemandesSuppressionRoute:
+    AuthenticatedAdminDemandesSuppressionRoute,
+  AuthenticatedAdminPaiementsRoute: AuthenticatedAdminPaiementsRoute,
+  AuthenticatedAdminParametresRoute: AuthenticatedAdminParametresRoute,
+  AuthenticatedAdminPlansRoute: AuthenticatedAdminPlansRoute,
+  AuthenticatedAdminSupportRoute: AuthenticatedAdminSupportRoute,
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminBoutiquesShopIdRoute:
+    AuthenticatedAdminBoutiquesShopIdRoute,
+  AuthenticatedAdminSupportTicketIdRoute:
+    AuthenticatedAdminSupportTicketIdRoute,
+}
+
+const AuthenticatedAdminRouteWithChildren =
+  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
+
+interface AuthenticatedDashboardSupportRouteChildren {
+  AuthenticatedDashboardSupportNouveauRoute: typeof AuthenticatedDashboardSupportNouveauRoute
+}
+
+const AuthenticatedDashboardSupportRouteChildren: AuthenticatedDashboardSupportRouteChildren =
+  {
+    AuthenticatedDashboardSupportNouveauRoute:
+      AuthenticatedDashboardSupportNouveauRoute,
+  }
+
+const AuthenticatedDashboardSupportRouteWithChildren =
+  AuthenticatedDashboardSupportRoute._addFileChildren(
+    AuthenticatedDashboardSupportRouteChildren,
+  )
+
+interface AuthenticatedDashboardRouteChildren {
+  AuthenticatedDashboardAbonnementRoute: typeof AuthenticatedDashboardAbonnementRoute
+  AuthenticatedDashboardBoutiqueRoute: typeof AuthenticatedDashboardBoutiqueRoute
+  AuthenticatedDashboardCommandesRoute: typeof AuthenticatedDashboardCommandesRoute
+  AuthenticatedDashboardProduitsRoute: typeof AuthenticatedDashboardProduitsRoute
+  AuthenticatedDashboardPromotionsRoute: typeof AuthenticatedDashboardPromotionsRoute
+  AuthenticatedDashboardReglagesRoute: typeof AuthenticatedDashboardReglagesRoute
+  AuthenticatedDashboardSupportRoute: typeof AuthenticatedDashboardSupportRouteWithChildren
+  AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
+  AuthenticatedDashboardCommandesOrderIdRoute: typeof AuthenticatedDashboardCommandesOrderIdRoute
+  AuthenticatedDashboardSupportTicketIdRoute: typeof AuthenticatedDashboardSupportTicketIdRoute
+}
+
+const AuthenticatedDashboardRouteChildren: AuthenticatedDashboardRouteChildren =
+  {
+    AuthenticatedDashboardAbonnementRoute:
+      AuthenticatedDashboardAbonnementRoute,
+    AuthenticatedDashboardBoutiqueRoute: AuthenticatedDashboardBoutiqueRoute,
+    AuthenticatedDashboardCommandesRoute: AuthenticatedDashboardCommandesRoute,
+    AuthenticatedDashboardProduitsRoute: AuthenticatedDashboardProduitsRoute,
+    AuthenticatedDashboardPromotionsRoute:
+      AuthenticatedDashboardPromotionsRoute,
+    AuthenticatedDashboardReglagesRoute: AuthenticatedDashboardReglagesRoute,
+    AuthenticatedDashboardSupportRoute:
+      AuthenticatedDashboardSupportRouteWithChildren,
+    AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
+    AuthenticatedDashboardCommandesOrderIdRoute:
+      AuthenticatedDashboardCommandesOrderIdRoute,
+    AuthenticatedDashboardSupportTicketIdRoute:
+      AuthenticatedDashboardSupportTicketIdRoute,
+  }
+
+const AuthenticatedDashboardRouteWithChildren =
+  AuthenticatedDashboardRoute._addFileChildren(
+    AuthenticatedDashboardRouteChildren,
+  )
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRouteWithChildren
+  AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRouteWithChildren,
+  AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+interface BSlugRouteChildren {
+  BSlugIndexRoute: typeof BSlugIndexRoute
+  BSlugPProductIdRoute: typeof BSlugPProductIdRoute
+  BSlugPromoPromoIdRoute: typeof BSlugPromoPromoIdRoute
+}
+
+const BSlugRouteChildren: BSlugRouteChildren = {
+  BSlugIndexRoute: BSlugIndexRoute,
+  BSlugPProductIdRoute: BSlugPProductIdRoute,
+  BSlugPromoPromoIdRoute: BSlugPromoPromoIdRoute,
+}
+
+const BSlugRouteWithChildren = BSlugRoute._addFileChildren(BSlugRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  DataDeletionRoute: DataDeletionRoute,
+  PrivacyRoute: PrivacyRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  TermsRoute: TermsRoute,
+  AbonnementRetourRoute: AbonnementRetourRoute,
+  BSlugRoute: BSlugRouteWithChildren,
+  RobotsTxtRoute: RobotsTxtRoute,
+  SitemapXmlRoute: SitemapXmlRoute,
+  ApiCronProcessAccountDeletionsRoute: ApiCronProcessAccountDeletionsRoute,
+  ApiCronSubscriptionRemindersRoute: ApiCronSubscriptionRemindersRoute,
+  ApiPublicBroadcastTrackRoute: ApiPublicBroadcastTrackRoute,
+  ApiPublicInvoicePdfRoute: ApiPublicInvoicePdfRoute,
+  ApiPublicWebhookSaspayRoute: ApiPublicWebhookSaspayRoute,
+  ApiPublicMediaSplatRoute: ApiPublicMediaSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,0 +1,272 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { logAction } from "@/hooks/useIsAdmin";
+import { Settings2, Activity, CreditCard, Save, Clock, Fingerprint, Globe, Mail, Info, Edit2, X, CheckCircle2 } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+export const Route = createFileRoute("/_authenticated/admin/parametres")({ component: Settings });
+
+function Settings() {
+  const qc = useQueryClient();
+  const { data: settings, isLoading: loadingSettings } = useQuery({ 
+    queryKey: ["settings"], 
+    queryFn: async () => Object.fromEntries(((await supabase.from("app_settings").select("*")).data ?? []).map((r) => [r.key, r.value])) as Record<string, string> 
+  });
+  
+  const { data: logs, isLoading: loadingLogs } = useQuery({ 
+    queryKey: ["audit"], 
+    queryFn: async () => (await supabase.from("audit_log").select("*").order("created_at", { ascending: false }).limit(50)).data ?? [] 
+  });
+
+
+  const [form, setForm] = useState<Record<string, string>>({});
+  const [originalForm, setOriginalForm] = useState<Record<string, string>>({});
+  const [saving, setSaving] = useState<string | null>(null);
+  const [editingTab, setEditingTab] = useState<string | null>(null);
+
+  useEffect(() => { 
+    if (settings) { 
+      const initData = {
+        platform_name: settings.platform_name ?? "MarketNet",
+        contact_email: settings.contact_email ?? "",
+        support_email: settings.support_email ?? "",
+        payment_instructions: settings.payment_instructions ?? "",
+      };
+      setForm(initData);
+      setOriginalForm(initData);
+    } 
+  }, [settings]);
+
+  async function saveSection(sectionName: string, keys: string[]) {
+    setSaving(sectionName);
+    try {
+      const updates = keys.map(key => ({ key, value: form[key] }));
+      const { error } = await supabase.from("app_settings").upsert(updates);
+      if (error) throw error;
+      await logAction("settings.update", sectionName); 
+      toast.success("Parametres mis a jour"); 
+      qc.invalidateQueries({ queryKey: ["settings"] });
+      setEditingTab(null);
+    } catch (cause) {
+      toast.error("Erreur lors de la sauvegarde");
+    } finally {
+      setSaving(null);
+    }
+  }
+
+  function cancelEdit() {
+    setForm(originalForm);
+    setEditingTab(null);
+  }
+
+  function formatActionName(action: string) {
+    const actions: Record<string, string> = {
+      "settings.update": "Modification des parametres",
+      "shop.suspend": "Suspension de boutique",
+      "shop.unsuspend": "Reactivation de boutique",
+      "merchant.suspended": "Suspension de compte",
+      "merchant.active": "Reactivation de compte",
+      "report.resolve": "Signalement traite",
+      "plan.create": "Creation de plan",
+      "plan.update": "Mise a jour de plan",
+      "plan.delete": "Suppression de plan"
+    };
+    return actions[action] || action;
+  }
+
+  const renderActionButtons = (tabId: string, keysToSave: string[]) => {
+    if (editingTab !== tabId) {
+      return (
+        <Button className="rounded-xl shadow-sm h-11 bg-secondary text-secondary-foreground hover:bg-secondary/80" onClick={() => setEditingTab(tabId)}>
+          <Edit2 className="h-4 w-4 mr-2" /> Modifier
+        </Button>
+      );
+    }
+    return (
+      <div className="flex gap-2">
+        <Button variant="outline" className="rounded-xl h-11 px-3 text-muted-foreground hover:bg-muted" onClick={cancelEdit} disabled={saving === tabId}>
+          <X className="h-5 w-5" />
+        </Button>
+        <Button onClick={() => saveSection(tabId, keysToSave)} disabled={saving === tabId} className="rounded-xl shadow-sm h-11 bg-primary text-primary-foreground hover:bg-primary/90">
+          {saving === tabId ? "Enregistrement..." : <><Save className="mr-2 h-4 w-4" /> Enregistrer</>}
+        </Button>
+      </div>
+    );
+  };
+
+  const inputClass = (tabId: string) => 
+    `text-sm h-11 ${editingTab !== tabId ? 'bg-transparent border-transparent px-0 focus-visible:ring-0 shadow-none' : 'bg-background'}`;
+  const textareaClass = (tabId: string) => 
+    `text-sm ${editingTab !== tabId ? 'bg-transparent border-transparent px-0 focus-visible:ring-0 shadow-none resize-none' : 'bg-background resize-y'}`;
+
+  if (loadingSettings) return <div className="p-8 text-center text-muted-foreground animate-pulse">Chargement des parametres...</div>;
+
+  return (
+    <div className="mx-auto max-w-6xl space-y-8">
+      <div>
+        <h1 className="text-2xl font-bold tracking-tight">Parametres de la plateforme</h1>
+        <p className="mt-1 text-sm text-muted-foreground">Gerez l'identite, les integrations et surveillez les actions de l'administration.</p>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
+        
+        <div className="space-y-6">
+          <Tabs defaultValue="general" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 bg-muted/50 p-1">
+              <TabsTrigger value="general" className="rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm">General</TabsTrigger>
+              <TabsTrigger value="billing" className="rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm">Facturation</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="general" className="mt-4 outline-none">
+              <div className="rounded-2xl border bg-card overflow-hidden shadow-sm">
+                <div className="border-b bg-muted/10 px-6 py-5 flex items-center gap-3">
+                  <div className="rounded-lg bg-primary/10 p-2 text-primary"><Settings2 className="h-5 w-5" /></div>
+                  <div>
+                    <h2 className="font-semibold">Informations generales</h2>
+                    <p className="text-xs text-muted-foreground">Identite globale de la plateforme MarketNet.</p>
+                  </div>
+                </div>
+                <div className="p-6 space-y-5">
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2"><Globe className="h-4 w-4 text-muted-foreground" /> Nom de la plateforme</Label>
+                    <Input 
+                      className={inputClass("general")} 
+                      value={form.platform_name} 
+                      onChange={e => setForm({...form, platform_name: e.target.value})} 
+                      placeholder="MarketNet" 
+                      readOnly={editingTab !== "general"}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2"><Mail className="h-4 w-4 text-muted-foreground" /> Email de contact général</Label>
+                    <Input 
+                      type="email" 
+                      className={inputClass("general")} 
+                      value={form.contact_email} 
+                      onChange={e => setForm({...form, contact_email: e.target.value})} 
+                      placeholder="contact@marketnet.com" 
+                      readOnly={editingTab !== "general"}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2"><Mail className="h-4 w-4 text-amber-500" /> Email de notification Support</Label>
+                    <Input 
+                      type="email" 
+                      className={inputClass("general")} 
+                      value={form.support_email} 
+                      onChange={e => setForm({...form, support_email: e.target.value})} 
+                      placeholder="support@marketnet.com (laisser vide pour utiliser l'email de contact)" 
+                      readOnly={editingTab !== "general"}
+                    />
+                    <p className="text-[11px] text-muted-foreground">
+                      Reçoit les notifications d'alerte lors de la création d'un nouveau ticket commerçant.
+                    </p>
+                  </div>
+                  <div className="flex justify-end pt-2 border-t border-dashed mt-4">
+                    {renderActionButtons("general", ["platform_name", "contact_email", "support_email"])}
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="billing" className="mt-4 outline-none space-y-4">
+              {/* Carte statut SasPay */}
+              <div className="rounded-2xl border bg-card overflow-hidden shadow-sm">
+                <div className="border-b bg-muted/10 px-6 py-5 flex items-center gap-3">
+                  <div className="rounded-lg bg-primary/10 p-2 text-primary"><CreditCard className="h-5 w-5" /></div>
+                  <div>
+                    <h2 className="font-semibold">Passerelle de paiement — SasPay</h2>
+                    <p className="text-xs text-muted-foreground">Les abonnements sont collectés automatiquement en Franc Congolais (FC) via SasPay.</p>
+                  </div>
+                </div>
+                <div className="p-6 space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div className="rounded-xl border bg-emerald-50/60 dark:bg-emerald-950/20 border-emerald-100 dark:border-emerald-900/40 p-4 flex flex-col gap-1">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">Environnement</span>
+                      <span className="text-base font-black text-emerald-800 dark:text-emerald-300">Production (Live)</span>
+                      <span className="text-[11px] text-muted-foreground">Paiements réels activés</span>
+                    </div>
+                    <div className="rounded-xl border bg-muted/30 p-4 flex flex-col gap-1">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Devise</span>
+                      <span className="text-base font-black">CDF (FC)</span>
+                      <span className="text-[11px] text-muted-foreground">Franc Congolais uniquement</span>
+                    </div>
+                    <div className="rounded-xl border bg-muted/30 p-4 flex flex-col gap-1">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Webhook</span>
+                      <span className="text-base font-black truncate text-xs font-mono">/api/public/webhook-saspay</span>
+                      <span className="text-[11px] text-muted-foreground">Activation automatique</span>
+                    </div>
+                  </div>
+
+                  <div className="rounded-xl border bg-amber-50/60 dark:bg-amber-950/20 border-amber-100 dark:border-amber-900/30 p-4 text-xs text-amber-800 dark:text-amber-300 flex gap-2 items-start">
+                    <span className="mt-0.5">⚙️</span>
+                    <span>Pour modifier les clés API SasPay ou l'URL du webhook, mettez à jour les variables d'environnement <code className="font-mono bg-amber-100 dark:bg-amber-900/40 px-1 rounded">SASPAY_SECRET_KEY</code> et <code className="font-mono bg-amber-100 dark:bg-amber-900/40 px-1 rounded">SASPAY_WEBHOOK_SECRET</code> dans Vercel.</span>
+                  </div>
+
+                  <div className="flex justify-end border-t border-dashed pt-4">
+                    <a href="https://dashboard.saspay.com" target="_blank" rel="noreferrer">
+                      <button className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 h-10 text-sm font-bold text-primary-foreground shadow-sm hover:bg-primary/90 transition-colors">
+                        <CreditCard className="h-4 w-4" /> Tableau de bord SasPay
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+
+
+
+          </Tabs>
+        </div>
+
+        <div className="space-y-6">
+          <div className="rounded-2xl border bg-card shadow-sm flex flex-col h-[calc(100vh-12rem)] sticky top-6">
+            <div className="border-b bg-muted/10 px-5 py-4 flex items-center gap-3">
+              <div className="rounded-lg bg-secondary p-2 text-secondary-foreground"><Activity className="h-5 w-5" /></div>
+              <div>
+                <h2 className="font-semibold">Journal d'activite</h2>
+                <p className="text-[11px] text-muted-foreground uppercase tracking-wide font-semibold mt-0.5">50 dernieres actions</p>
+              </div>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto p-2">
+              {loadingLogs ? (
+                <div className="p-6 text-center text-sm text-muted-foreground animate-pulse">Chargement du journal...</div>
+              ) : !logs?.length ? (
+                <div className="p-6 text-center text-sm text-muted-foreground">Aucune action enregistree recemment.</div>
+              ) : (
+                <div className="relative pl-4 space-y-4 py-4 before:absolute before:inset-y-0 before:left-[21px] before:w-px before:bg-border">
+                  {logs.map((l) => (
+                    <div key={l.id} className="relative pl-6">
+                      <div className="absolute left-[-1.5px] top-1 h-3 w-3 rounded-full border-2 border-background bg-muted-foreground/30" />
+                      <div className="text-sm font-medium leading-none mb-1 text-foreground">
+                        {formatActionName(l.action)}
+                      </div>
+                      <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
+                        <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {new Date(l.created_at).toLocaleString("fr-FR", { hour: '2-digit', minute: '2-digit', day: '2-digit', month: 'short' })}</span>
+                        {l.target && (
+                          <>
+                            <span>&bull;</span>
+                            <span className="flex items-center gap-1 font-mono"><Fingerprint className="h-3 w-3" /> {l.target.slice(0, 8)}</span>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}

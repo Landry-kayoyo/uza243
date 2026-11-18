@@ -1,0 +1,18 @@
+{
+  "source": "https://github.com/marketnet243/MarketNet.git",
+  "capabilities": [
+    {"capability":"Application code and design","source":"GitHub TanStack Start","outcome":"import and redesign","status":"in_progress","next_action":"Import all storefront, merchant and admin pages; replace orange with restrained semantic tokens."},
+    {"capability":"Schema and authorization","source":"PostgreSQL migrations","outcome":"migrate","status":"in_progress","next_action":"Apply schema to Lovable Cloud with explicit grants and tenant policies."},
+    {"capability":"Existing application records","source":"No record export supplied","outcome":"migrate","status":"pending","next_action":"Supply CSV or JSON exports."},
+    {"capability":"Auth identities and ownership mapping","source":"No user export supplied","outcome":"migrate","status":"pending","next_action":"Supply original user IDs, emails, profiles, roles and memberships; verified first-login password setup and mapping must be implemented and tested after export."},
+    {"capability":"Authentication","source":"Email/password and Google","outcome":"migrate","status":"in_progress","next_action":"Use Lovable Cloud email and managed Google sign-in."},
+    {"capability":"Uploaded file metadata and bytes","source":"Cloudinary and legacy storage","outcome":"preserve","status":"pending","next_action":"Supply existing metadata and confirm retained file availability."},
+    {"capability":"Payments and webhook","source":"SasPay","outcome":"preserve","status":"pending","next_action":"Configure retained provider credentials securely and update webhook URL after publishing."},
+    {"capability":"Media provider","source":"Cloudinary","outcome":"preserve","status":"pending","next_action":"Configure retained provider credentials securely; verify upload."},
+    {"capability":"Transactional email","source":"SMTP","outcome":"preserve","status":"pending","next_action":"Configure retained SMTP credentials securely; verify sending in hosted runtime."},
+    {"capability":"Public endpoints and callbacks","source":"TanStack API routes, invoice/media/broadcast/payment callbacks","outcome":"preserve","status":"in_progress","next_action":"Import all endpoints and verify authorization and routing."},
+    {"capability":"Schedules","source":"Daily subscription reminders and account deletion routes","outcome":"preserve","status":"pending","next_action":"Preserve original callbacks; configure managed authenticated daily schedules and verify provider dependencies."},
+    {"capability":"Cutover","source":"Existing deployment","outcome":"pending publication","status":"pending","next_action":"Publish and update provider callbacks and site URL without interrupting original deployment."},
+    {"capability":"Verification","source":"Source test suite and real browser","outcome":"verify","status":"in_progress","next_action":"Run source tests and exercise a signed-in shop/product/order flow."}
+  ]
+}
