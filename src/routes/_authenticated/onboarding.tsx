@@ -32,6 +32,10 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/onboarding")({
   head: () => ({
     meta: [
+      { property: "og:title", content: "Configuration de votre boutique — MarketNet" },
+      { property: "og:description", content: "Configurez votre boutique en ligne MarketNet en quelques étapes simples." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Configuration de votre boutique — MarketNet" },
       { name: "description", content: "Configurez votre boutique en ligne MarketNet en quelques étapes simples." },
     ],
@@ -234,16 +238,16 @@ function Onboarding() {
   if (launching && busy) {
     return (
       <div className="min-h-screen bg-linear-to-b from-background via-muted/20 to-background flex flex-col justify-center items-center px-4 py-12 select-none">
-        <div className="w-full max-w-md bg-card/95 backdrop-blur-md border border-border/80 rounded-3xl p-6 sm:p-8 shadow-xl space-y-7 transition-all">
+        <div className="w-full max-w-md bg-card/95 backdrop-blur-md border border-border/80 rounded-3xl p-6 sm:p-8 shadow-lift space-y-7 transition-all">
           
           <div className="text-center space-y-2">
             <div className="mx-auto h-12 w-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-3 shadow-inner">
-              <Sparkles className="h-6 w-6 animate-pulse" />
+              <Sparkles className="h-6 w-6 " />
             </div>
-            <span className="inline-block text-[11px] font-bold text-primary uppercase tracking-wider bg-primary/10 px-3 py-0.5 rounded-full">
+            <span className="inline-block text-[11px] font-bold text-primary uppercase tracking-normal bg-primary/10 px-3 py-0.5 rounded-full">
               Assistant MarketNet
             </span>
-            <h1 className="text-xl sm:text-2xl font-black tracking-tight text-foreground">
+            <h1 className="text-xl sm:text-2xl font-black tracking-normal text-foreground">
               {creationProgress === 100 ? "Votre boutique est prête !" : "Création de votre boutique..."}
             </h1>
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
@@ -261,7 +265,7 @@ function Onboarding() {
             </div>
             <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
               <div
-                className="h-full bg-primary transition-all duration-700 ease-out rounded-full"
+                className="h-full bg-primary  rounded-full"
                 style={{ width: `${creationProgress}%` }}
               />
             </div>
@@ -277,7 +281,7 @@ function Onboarding() {
                 <div
                   key={label}
                   className={cn(
-                    "flex items-center gap-3 text-xs sm:text-sm transition-all duration-300",
+                    "flex items-center gap-3 text-xs sm:text-sm ",
                     isCompleted
                       ? "text-foreground font-medium"
                       : isCurrent
@@ -289,7 +293,7 @@ function Onboarding() {
                     className={cn(
                       "h-5 w-5 rounded-full flex items-center justify-center shrink-0 transition-colors",
                       isCompleted
-                        ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
+                        ? "bg-success/15 text-success dark:text-success"
                         : isCurrent
                         ? "bg-primary/10 text-primary"
                         : "bg-muted text-muted-foreground/30"
@@ -326,10 +330,10 @@ function Onboarding() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="onboarding-page flex flex-col">
       {/* Header minimaliste avec barre de progression */}
       <header className="border-b border-border/60 bg-background/80 backdrop-blur-sm sticky top-0 z-30">
-        <div className="mx-auto max-w-2xl px-4 py-4 flex items-center justify-between">
+        <div className="mx-auto max-w-2xl px-5 py-4 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
           <Logo />
           {step > 0 && (
             <span className="text-xs font-medium text-muted-foreground">
@@ -341,7 +345,7 @@ function Onboarding() {
         {step > 0 && (
           <div className="h-0.5 w-full bg-muted">
             <div
-              className="h-full bg-primary transition-all duration-300 ease-out"
+              className="h-full bg-primary  ease-out"
               style={{ width: `${(step / TOTAL_CONFIG_STEPS) * 100}%` }}
             />
           </div>
@@ -349,14 +353,14 @@ function Onboarding() {
       </header>
 
       {/* Contenu centré épuré */}
-      <main className="flex-1 flex flex-col justify-center items-center px-4 py-10 sm:py-16">
-        <div className="w-full max-w-lg space-y-8">
+      <main className="flex-1 flex flex-col items-center px-5 py-8 sm:py-12">
+        <div className="onboarding-content space-y-8">
 
           {/* ── ÉCRAN 0 : BIENVENUE (STYLE VYTRINI) ── */}
           {step === 0 && (
             <div className="space-y-8 text-center sm:text-left">
               <div className="space-y-3">
-                <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+                <h1 className="text-3xl sm:text-4xl font-bold tracking-normal text-foreground">
                   Bienvenue sur MarketNet
                 </h1>
                 <p className="text-base text-muted-foreground leading-relaxed">
@@ -402,7 +406,7 @@ function Onboarding() {
                   type="button"
                   size="lg"
                   onClick={() => setStep(1)}
-                  className="w-full h-12 rounded-xl text-sm font-semibold cursor-pointer gap-2 transition-transform active:scale-98"
+                  className="w-full h-12 rounded-xl text-sm font-semibold cursor-pointer gap-2 transition-transform "
                 >
                   <span>Commencer la configuration</span>
                   <ArrowRight className="h-4 w-4" />
@@ -415,7 +419,7 @@ function Onboarding() {
           {step === 1 && (
             <div className="space-y-6">
               <div className="space-y-2">
-                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-normal text-foreground">
                   Comment s'appelle votre boutique ?
                 </h1>
                 <p className="text-sm text-muted-foreground leading-relaxed">
@@ -441,8 +445,7 @@ function Onboarding() {
                       });
                     }}
                     className="h-12 rounded-xl bg-background border-input text-base font-medium px-4 focus-visible:ring-1 focus-visible:ring-primary"
-                    autoFocus
-                  />
+                                      />
                 </div>
 
                 {/* Lien public attribué */}
@@ -456,7 +459,7 @@ function Onboarding() {
                     </span>
                     <input
                       id="shop-slug"
-                      className="h-full flex-1 bg-transparent outline-none font-medium text-foreground truncate px-1 text-sm"
+                      className="h-full min-w-0 flex-1 bg-transparent outline-none font-medium text-foreground truncate px-1 text-sm"
                       value={draft.slug}
                       onChange={(e) =>
                         set({
@@ -469,7 +472,7 @@ function Onboarding() {
                       <Loader2 className="h-3.5 w-3.5 animate-spin text-muted-foreground shrink-0" />
                     )}
                     {slugState === "free" && (
-                      <Check className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                      <Check className="h-3.5 w-3.5 text-success shrink-0" />
                     )}
                   </div>
                   {slugState === "taken" && (
@@ -484,7 +487,7 @@ function Onboarding() {
           {step === 2 && (
             <div className="space-y-6">
               <div className="space-y-2">
-                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-normal text-foreground">
                   Quel est votre secteur d'activité ?
                 </h1>
                 <p className="text-sm text-muted-foreground leading-relaxed">
@@ -496,7 +499,7 @@ function Onboarding() {
                 {SECTORS.map((sector) => {
                   const isSelected = draft.category === sector;
                   return (
-                    <button
+                    <Button variant="ghost"
                       key={sector}
                       type="button"
                       onClick={() =>
@@ -514,7 +517,7 @@ function Onboarding() {
                     >
                       <span className="truncate">{sector}</span>
                       {isSelected && <Check className="h-4 w-4 text-primary shrink-0 ml-2" />}
-                    </button>
+                    </Button>
                   );
                 })}
               </div>
@@ -526,8 +529,7 @@ function Onboarding() {
                     value={draft.category_custom}
                     onChange={(e) => set({ category_custom: e.target.value })}
                     className="h-11 rounded-xl text-sm"
-                    autoFocus
-                  />
+                                      />
                 </div>
               )}
             </div>
@@ -537,7 +539,7 @@ function Onboarding() {
           {step === 3 && (
             <div className="space-y-6">
               <div className="space-y-2">
-                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-normal text-foreground">
                   Décrivez votre boutique
                 </h1>
                 <p className="text-sm text-muted-foreground leading-relaxed">
@@ -557,8 +559,7 @@ function Onboarding() {
                   value={draft.description}
                   onChange={(e) => set({ description: e.target.value })}
                   className="rounded-xl bg-background border-input text-sm p-4 leading-relaxed focus-visible:ring-1 focus-visible:ring-primary"
-                  autoFocus
-                />
+                                  />
                 <div className="flex justify-end text-[11px] text-muted-foreground">
                   <span>{draft.description.length} / 1000 caractères</span>
                 </div>
@@ -570,7 +571,7 @@ function Onboarding() {
           {step === 4 && (
             <div className="space-y-6">
               <div className="space-y-2">
-                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-normal text-foreground">
                   Où recevez-vous vos commandes ?
                 </h1>
                 <p className="text-sm text-muted-foreground leading-relaxed">
@@ -590,8 +591,7 @@ function Onboarding() {
                     value={draft.whatsapp}
                     onChange={(e) => set({ whatsapp: e.target.value.replace(/[^\d+]/g, "") })}
                     className="h-12 rounded-xl bg-background border-input text-base font-medium px-4 focus-visible:ring-1 focus-visible:ring-primary"
-                    autoFocus
-                  />
+                                      />
                   <p className="text-xs text-muted-foreground">
                     Format international requis (ex. +243 suivi de votre numéro).
                   </p>
@@ -632,7 +632,7 @@ function Onboarding() {
                       "Lun - Ven : 08h30 - 17h00",
                       "Sur commande uniquement",
                     ].map((preset) => (
-                      <button
+                      <Button variant="ghost"
                         key={preset}
                         type="button"
                         onClick={() => set({ hours: draft.hours === preset ? "" : preset })}
@@ -644,7 +644,7 @@ function Onboarding() {
                         )}
                       >
                         {preset}
-                      </button>
+                      </Button>
                     ))}
                   </div>
                   <p className="text-xs text-muted-foreground">
@@ -659,7 +659,7 @@ function Onboarding() {
           {step === 5 && (
             <div className="space-y-6">
               <div className="space-y-2">
-                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-normal text-foreground">
                   Ajoutez le logo de votre boutique
                 </h1>
                 <p className="text-sm text-muted-foreground leading-relaxed">
@@ -677,18 +677,18 @@ function Onboarding() {
                         alt="Logo de la boutique"
                         className="h-28 w-28 rounded-2xl object-cover border border-border shadow-xs"
                       />
-                      <button
+                      <Button variant="ghost"
                         type="button"
                         onClick={() => set({ logo_url: null })}
                         className="absolute -top-2 -right-2 p-1.5 rounded-full bg-destructive text-destructive-foreground shadow-sm hover:opacity-90 transition-opacity"
                         title="Retirer le logo"
                       >
                         <X className="h-3.5 w-3.5" />
-                      </button>
+                      </Button>
                     </div>
                   ) : (
                     <div className="h-24 w-24 rounded-2xl bg-muted/60 border border-border flex flex-col items-center justify-center text-muted-foreground">
-                      <span className="text-2xl font-black text-foreground/80 tracking-wider">
+                      <span className="text-2xl font-black text-foreground/80 tracking-normal">
                         {getInitials(draft.name)}
                       </span>
                       <span className="text-[10px] mt-1 text-muted-foreground">Initiales auto</span>
@@ -737,7 +737,7 @@ function Onboarding() {
           {step === 6 && (
             <div className="space-y-6">
               <div className="space-y-2">
-                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-normal text-foreground">
                   Vérifiez votre boutique
                 </h1>
                 <p className="text-sm text-muted-foreground leading-relaxed">
@@ -747,7 +747,7 @@ function Onboarding() {
 
               {/* Carte récapitulative épurée */}
               <div className="bg-muted/20 border border-border/80 rounded-2xl p-5 sm:p-6 space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-border/60">
+                <div className="onboarding-summary-row pb-3 border-b border-border">
                   <span className="text-xs text-muted-foreground">Nom commercial</span>
                   <div className="flex items-center gap-2">
                     {draft.logo_url ? (
@@ -765,14 +765,14 @@ function Onboarding() {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pb-3 border-b border-border/60">
+                <div className="onboarding-summary-row pb-3 border-b border-border">
                   <span className="text-xs text-muted-foreground">Lien de la boutique</span>
                   <span className="text-xs font-medium font-mono text-primary truncate max-w-[220px]">
                     marketnet/b/{draft.slug}
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between pb-3 border-b border-border/60">
+                <div className="onboarding-summary-row pb-3 border-b border-border">
                   <span className="text-xs text-muted-foreground">Secteur</span>
                   <span className="text-sm text-foreground">{draft.category || "Commerce général"}</span>
                 </div>
@@ -786,12 +786,12 @@ function Onboarding() {
                   </div>
                 )}
 
-                <div className="flex items-center justify-between pb-3 border-b border-border/60">
+                <div className="onboarding-summary-row pb-3 border-b border-border">
                   <span className="text-xs text-muted-foreground">Commandes WhatsApp</span>
                   <span className="text-sm font-semibold text-foreground font-mono">{draft.whatsapp}</span>
                 </div>
 
-                <div className={cn("flex items-center justify-between", draft.hours && "pb-3 border-b border-border/60")}>
+                <div className={cn("onboarding-summary-row", draft.hours && "pb-3 border-b border-border/60")}>
                   <span className="text-xs text-muted-foreground">Zone de vente</span>
                   <span className="text-sm text-foreground">
                     {draft.city || "Kinshasa"}
@@ -799,7 +799,7 @@ function Onboarding() {
                 </div>
 
                 {draft.hours && (
-                  <div className="flex items-center justify-between">
+                  <div className="onboarding-summary-row">
                     <span className="text-xs text-muted-foreground">Horaires</span>
                     <span className="text-xs font-medium text-foreground truncate max-w-[220px]">
                       {draft.hours}
@@ -814,7 +814,7 @@ function Onboarding() {
                   size="lg"
                   onClick={handleConfirmAndLaunch}
                   disabled={busy}
-                  className="w-full h-12 rounded-xl text-sm font-semibold cursor-pointer gap-2 transition-transform active:scale-98"
+                  className="w-full h-12 rounded-xl text-sm font-semibold cursor-pointer gap-2 transition-transform "
                 >
                   <span>Confirmer et créer ma boutique</span>
                   <ArrowRight className="h-4 w-4" />
@@ -825,7 +825,7 @@ function Onboarding() {
 
           {/* Navigation sobre en bas (pour les étapes 1 à 6) */}
           {step > 0 && (
-            <div className="pt-6 border-t border-border/60 flex items-center justify-between gap-4">
+            <div className="onboarding-controls pt-6 border-t border-border">
               <Button
                 type="button"
                 variant="ghost"

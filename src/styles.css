@@ -10,9 +10,9 @@
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-xl: var(--radius);
+  --radius-2xl: var(--radius);
+  --radius-3xl: var(--radius);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -37,6 +37,11 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-overlay: var(--overlay);
   --color-shop: var(--shop-primary);
   --color-shop-foreground: var(--shop-primary-foreground);
   --color-shop-bg: var(--shop-bg);
@@ -66,7 +71,7 @@
   --secondary: oklch(0.958 0.009 160);
   --secondary-foreground: var(--foreground);
   --muted: oklch(0.97 0.003 160);
-  --muted-foreground: oklch(0.52 0.01 160);
+  --muted-foreground: oklch(0.46 0.012 160);
   --accent: oklch(0.94 0.019 160);
   --accent-foreground: var(--primary);
   --destructive: oklch(0.55 0.19 27);
@@ -79,8 +84,8 @@
   --input: oklch(0.88 0.007 160);
   --ring: var(--primary);
   --gradient-warm: linear-gradient(var(--primary), var(--primary));
-  --shadow-soft: 0 8px 30px -15px oklch(0.2 0.01 160 / 0.12);
-  --shadow-lift: 0 18px 50px -22px oklch(0.2 0.01 160 / 0.2);
+  --shadow-soft: 0 2px 8px -3px oklch(0.2 0.01 160 / 0.10);
+  --shadow-lift: 0 12px 32px -18px oklch(0.2 0.01 160 / 0.18);
   --shop-primary: var(--primary);
   --shop-primary-foreground: var(--primary-foreground);
   --shop-bg: var(--background);
@@ -98,6 +103,18 @@
   --sidebar-accent-foreground: var(--foreground);
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
+  --warning: oklch(0.50 0.065 85);
+  --warning-foreground: oklch(0.99 0 0);
+  --info: oklch(0.47 0.048 240);
+  --info-foreground: oklch(0.99 0 0);
+  --overlay: oklch(0.18 0.006 160 / 0.45);
+  --google-background: oklch(1 0 0);
+  --google-foreground: oklch(0.24 0 0);
+  --google-border: oklch(0.56 0.004 160);
+  --surface-inverse: oklch(0.245 0.024 165);
+  --surface-inverse-foreground: oklch(0.99 0.002 160);
+  --motion-duration: 160ms;
+  --motion-ease: cubic-bezier(0.2, 0.7, 0.3, 1);
   --hero-overlay: linear-gradient(90deg, oklch(0.98 0.003 160 / 0.98) 0%, oklch(0.98 0.003 160 / 0.84) 27%, oklch(0.98 0.003 160 / 0.05) 62%);
   --hero-overlay-mobile: linear-gradient(180deg, oklch(0.98 0.003 160 / 0.97) 0%, oklch(0.98 0.003 160 / 0.94) 48%, oklch(0.98 0.003 160 / 0.12) 76%);
 }
@@ -201,53 +218,53 @@
 .marketnet-benefit { display: flex; align-items: center; justify-content: center; gap: 14px; padding-inline: 16px; }
 .marketnet-benefit + .marketnet-benefit { border-left: 1px solid var(--border); }
 .marketnet-benefit svg { color: var(--primary); width: 23px; height: 23px; flex-shrink: 0; stroke-width: 1.5; }
-.marketnet-benefit strong { display: block; font-size: 12px; font-weight: 700; }
-.marketnet-benefit span { display: block; font-size: 11px; color: var(--muted-foreground); margin-top: 4px; }
+.marketnet-benefit strong { display: block; font-size: 14px; font-weight: 700; }
+.marketnet-benefit span { display: block; font-size: 12px; color: var(--muted-foreground); margin-top: 4px; }
 .marketnet-section { padding-block: 80px; scroll-margin-top: 24px; }
 .marketnet-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 32px; margin-bottom: 40px; }
 .marketnet-section-heading .marketnet-eyebrow { margin-bottom: 14px; }
 .marketnet-section h2 { font-size: 35px; line-height: 1.3; font-weight: 600; }
-.marketnet-section-intro { max-width: 310px; color: var(--muted-foreground); font-size: 13px; line-height: 1.8; }
+.marketnet-section-intro { max-width: 330px; color: var(--muted-foreground); font-size: 14px; line-height: 1.8; }
 .marketnet-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 42px; }
 .marketnet-step { border-top: 1px solid var(--border); padding-top: 25px; }
 .marketnet-step-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
 .marketnet-step-top span { color: var(--muted-foreground); font-family: 'Lora', serif; font-size: 29px; }
 .marketnet-step-top svg { color: var(--primary); width: 23px; stroke-width: 1.5; }
 .marketnet-step h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
-.marketnet-step p { font-size: 12px; line-height: 1.9; color: var(--muted-foreground); }
+.marketnet-step p { font-size: 14px; line-height: 1.8; color: var(--muted-foreground); }
 .marketnet-soft-section { background: var(--muted); }
 .marketnet-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px 45px; }
 .marketnet-feature svg { color: var(--primary); width: 24px; margin-bottom: 15px; stroke-width: 1.5; }
-.marketnet-feature h3 { font-weight: 700; font-size: 14px; margin-bottom: 8px; }
-.marketnet-feature p { color: var(--muted-foreground); font-size: 12px; line-height: 1.8; }
+.marketnet-feature h3 { font-weight: 700; font-size: 16px; margin-bottom: 8px; }
+.marketnet-feature p { color: var(--muted-foreground); font-size: 14px; line-height: 1.8; }
 .marketnet-sectors { display: grid; grid-template-columns: repeat(6,1fr); margin-top: 36px; gap: 20px; }
 .marketnet-sector { border-top: 1px solid var(--border); padding-top: 22px; }
 .marketnet-sector svg { color: var(--primary); width: 22px; margin-bottom: 14px; stroke-width: 1.5; }
-.marketnet-sector h3 { font-size: 12px; font-weight: 700; line-height: 1.5; }
+.marketnet-sector h3 { font-size: 14px; font-weight: 700; line-height: 1.5; }
 .marketnet-pricing { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 800px; margin-inline: auto; }
 .marketnet-plan { border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; background: var(--card); }
 .marketnet-plan-pro { border-color: var(--primary); }
 .marketnet-plan-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 .marketnet-plan h3 { font-size: 20px; font-weight: 700; }
 .marketnet-plan-badge { background: var(--accent); color: var(--primary); font-size: 10px; padding: 5px 8px; border-radius: 4px; }
-.marketnet-plan p { color: var(--muted-foreground); font-size: 12px; line-height: 1.7; }
+.marketnet-plan p { color: var(--muted-foreground); font-size: 14px; line-height: 1.7; }
 .marketnet-price { margin-block: 22px; font-size: 38px; font-weight: 700; }
 .marketnet-price span { color: var(--muted-foreground); font-size: 12px; font-weight: 400; }
 .marketnet-plan ul { padding-block: 22px; border-top: 1px solid var(--border); display: grid; gap: 14px; margin-bottom: 10px; }
-.marketnet-plan li { display: flex; align-items: start; gap: 9px; font-size: 12px; }
+.marketnet-plan li { display: flex; align-items: start; gap: 9px; font-size: 14px; }
 .marketnet-plan li svg { flex-shrink: 0; width: 15px; height: 15px; color: var(--primary); }
 .marketnet-testimonials { display: grid; grid-template-columns: repeat(3,1fr); gap: 30px; }
 .marketnet-quote { border-top: 1px solid var(--border); padding-top: 24px; }
 .marketnet-quote blockquote { font-family: 'Lora', serif; font-size: 17px; line-height: 1.8; margin-bottom: 24px; }
 .marketnet-quote-person { display: flex; align-items: center; gap: 12px; }
 .marketnet-quote-person img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
-.marketnet-quote-person strong { font-size: 12px; display: block; }
-.marketnet-quote-person span { font-size: 11px; color: var(--muted-foreground); }
+.marketnet-quote-person strong { font-size: 14px; display: block; }
+.marketnet-quote-person span { font-size: 12px; color: var(--muted-foreground); }
 .marketnet-faq { max-width: 780px; margin-inline: auto; }
 .marketnet-faq h2 { margin-bottom: 28px; }
 .marketnet-footer { border-top: 1px solid var(--border); padding-block: 34px; }
 .marketnet-footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.marketnet-footer p, .marketnet-footer-links { font-size: 11px; color: var(--muted-foreground); }
+.marketnet-footer p, .marketnet-footer-links { font-size: 12px; color: var(--muted-foreground); }
 .marketnet-footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
 .marketnet-support { position: fixed; bottom: 22px; right: 22px; z-index: 30; box-shadow: var(--shadow-soft); }
 @media (min-width: 1600px) { .marketnet-hero { min-height: 650px; } }
@@ -260,24 +277,24 @@
   .marketnet-nav, .marketnet-header-actions { display: none; }
   .marketnet-mobile-toggle { display: inline-flex; }
   .marketnet-mobile-nav { border-top: 1px solid var(--border); padding: 20px; display: grid; gap: 18px; font-size: 13px; }
-  .marketnet-hero { min-height: 650px; align-items: start; }
+  .marketnet-hero { min-height: 570px; align-items: start; }
   .marketnet-hero-image { object-position: 73% center; }
   .marketnet-hero::before { background: var(--hero-overlay-mobile); }
-  .marketnet-hero-copy { padding-block: 40px 280px; max-width: 100%; }
+  .marketnet-hero-copy { padding-block: 32px 145px; max-width: 100%; }
   .marketnet-eyebrow { font-size: 10px; margin-bottom: 20px; }
-  .marketnet-hero h1 { font-size: 49px; margin-bottom: 18px; }
-  .marketnet-hero h1 span { font-size: 38px; margin-top: 7px; }
-  .marketnet-hero p { font-size: 13px; line-height: 1.8; max-width: 320px; }
+  .marketnet-hero h1 { font-size: 44px; margin-bottom: 20px; }
+  .marketnet-hero h1 span { font-size: 36px; margin-top: 8px; }
+  .marketnet-hero p { font-size: 14px; line-height: 1.8; max-width: 320px; }
   .marketnet-hero-actions { gap: 15px; margin-top: 22px; }
   .marketnet-text-link { font-size: 11px; }
-  .marketnet-hero-note { font-size: 10px; margin-top: 16px; }
+  .marketnet-hero-note { font-size: 11px; margin-top: 16px; }
   .marketnet-benefits-inner { grid-template-columns: 1fr; padding-block: 12px; }
   .marketnet-benefit { justify-content: start; padding: 15px 5px; }
   .marketnet-benefit + .marketnet-benefit { border-left: none; border-top: 1px solid var(--border); }
   .marketnet-section { padding-block: 52px; }
   .marketnet-section-heading { display:block; margin-bottom: 30px; }
   .marketnet-section h2 { font-size: 28px; }
-  .marketnet-section-intro { margin-top: 16px; font-size: 12px; }
+  .marketnet-section-intro { margin-top: 16px; font-size: 14px; }
   .marketnet-steps, .marketnet-features, .marketnet-testimonials { grid-template-columns: 1fr; gap: 26px; }
   .marketnet-step-top { margin-bottom: 14px; }
   .marketnet-sectors { grid-template-columns: repeat(2,1fr); gap: 24px; }
@@ -286,3 +303,131 @@
   .marketnet-footer-inner { flex-direction: column; align-items: start; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* Shared layout and motion primitives. Form layouts intentionally do not animate. */
+@layer base {
+  body { line-height: 1.6; }
+  a, button { touch-action: manipulation; }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+  input, textarea, select { max-width: 100%; min-width: 0; }
+  img { max-width: 100%; }
+}
+.ui-control { transition: background-color var(--motion-duration), border-color var(--motion-duration), box-shadow var(--motion-duration), color var(--motion-duration); }
+.ui-control-primary:hover { box-shadow: var(--shadow-soft); }
+.ui-control-google { background: var(--google-background); color: var(--google-foreground); border: 1px solid var(--google-border); font-weight: 500; }
+.ui-control-google:hover { background: var(--muted); }
+.skip-link { position: fixed; top: 12px; left: 12px; transform: translateY(-200%); background: var(--primary); color: var(--primary-foreground); padding: 12px 18px; border-radius: var(--radius); z-index: 100; }
+.skip-link:focus { transform: translateY(0); }
+.marketnet-site-header { position: sticky; top: 0; z-index: 40; background: var(--background); border-bottom: 1px solid var(--border); }
+.marketnet-header { height: 76px; }
+.marketnet-logo, .marketnet-logo-mark { flex-shrink: 0; }
+.marketnet-mobile-nav { position: absolute; inset-inline: 0; top: 100%; background: var(--background); box-shadow: var(--shadow-lift); max-height: calc(100dvh - 72px); overflow: auto; }
+.marketnet-mobile-nav a:not([class]) { padding-block: 10px; }
+.marketnet-section { scroll-margin-top: 96px; }
+.marketnet-hero-actions > a { min-height: 44px; }
+.marketnet-editorial { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); align-items: center; gap: 64px; }
+.marketnet-editorial-media { position: relative; min-width: 0; }
+.marketnet-editorial-photo { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); }
+.marketnet-editorial h2 { margin-bottom: 20px; }
+.marketnet-editorial p { color: var(--muted-foreground); font-size: 15px; line-height: 1.8; }
+.marketnet-editorial-list { display: grid; gap: 16px; margin-block: 24px; }
+.marketnet-editorial-list li { display: grid; grid-template-columns: 20px minmax(0,1fr); gap: 12px; align-items: start; font-size: 14px; }
+.marketnet-editorial-list svg { width: 17px; color: var(--primary); margin-top: 3px; }
+.marketnet-catalogue-label { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 12px; padding: 18px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.marketnet-catalogue-label span { color: var(--muted-foreground); }
+.marketnet-final { background: var(--surface-inverse); color: var(--surface-inverse-foreground); text-align: center; padding-block: 72px; }
+.marketnet-final h2 { font-size: 36px; line-height: 1.25; margin-bottom: 18px; }
+.marketnet-final p { max-width: 520px; margin: 0 auto 28px; line-height: 1.8; font-size: 15px; }
+.marketnet-final .marketnet-eyebrow { color: inherit; justify-content: center; }
+.marketnet-final .marketnet-eyebrow::before { background: currentColor; }
+.marketnet-reveal { opacity: 1; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .marketnet-reveal { animation: marketnet-appear linear both; animation-timeline: view(); animation-range: entry 0% entry 20%; }
+  }
+}
+@keyframes marketnet-appear { from { opacity: 0.6; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .marketnet-feature { transition: transform 160ms var(--motion-ease); }
+  .marketnet-feature:hover { transform: translateY(-3px); }
+  .marketnet-plan { transition: border-color 160ms, box-shadow 160ms; }
+  .marketnet-plan:hover { box-shadow: var(--shadow-lift); }
+}
+.auth-page { min-height: 100dvh; display: flex; flex-direction: column; align-items: center; padding: 32px 24px; background: var(--background); }
+.auth-brand { width: min(100%, 440px); display: flex; justify-content: center; margin: 20px 0 40px; }
+.auth-panel { width: min(100%, 440px); min-height: 440px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 36px; }
+.auth-heading { min-height: 100px; text-align: left; margin-bottom: 12px; }
+.auth-heading h1 { font-size: 28px; line-height: 1.3; font-weight: 700; margin-bottom: 10px; }
+.auth-heading p { font-size: 14px; line-height: 1.7; color: var(--muted-foreground); }
+.auth-progress { display: flex; gap: 6px; margin-bottom: 24px; height: 3px; }
+.auth-progress span { flex: 1; background: var(--border); }
+.auth-progress span[data-active=true] { background: var(--primary); }
+.auth-step-caption { color: var(--muted-foreground); font-size: 12px; margin-bottom: 12px; }
+.auth-footer { width: min(100%,440px); margin-top: 24px; font-size: 13px; text-align: center; color: var(--muted-foreground); }
+.auth-field { height: 48px; font-size: 16px; background: var(--background); border-radius: var(--radius); }
+.auth-label { font-size: 13px; font-weight: 600; }
+.auth-submit { height: 48px; font-size: 14px; width: 100%; }
+.auth-inline { font-size: 12px; min-height: 32px; padding: 0; }
+.auth-toggle { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; color: var(--muted-foreground); }
+.auth-panel form { min-height: 182px; }
+.onboarding-page { min-height: 100dvh; background: var(--background); }
+.onboarding-content { width: min(100%, 560px); margin-inline: auto; min-height: 480px; }
+.onboarding-content h1 { font-size: 28px; line-height: 1.35; }
+.onboarding-content label { font-size: 13px; }
+.onboarding-summary-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.1fr); gap: 16px; align-items: start; }
+.onboarding-summary-row > :last-child { min-width: 0; overflow-wrap: anywhere; text-align: right; }
+.onboarding-controls { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 12px; }
+.onboarding-controls > :last-child { justify-self: end; max-width: 100%; white-space: normal; }
+.workspace-content { width: 100%; max-width: 1200px; min-width: 0; margin-inline: auto; padding: 32px; }
+.workspace-header { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 16px; align-items: center; }
+.workspace-header > :first-child { min-width: 0; }
+.workspace-loading { min-height: 100dvh; display: grid; place-items: center; background: var(--background); }
+.workspace-loading-inner { width: min(80%, 420px); }
+.workspace-loading-bar { height: 12px; background: var(--muted); border-radius: var(--radius); margin-bottom: 18px; }
+.workspace-loading-bar:first-child { width: 50%; height: 24px; }
+.workspace-mobile-nav { min-height: 68px; }
+.workspace-mobile-nav > * { min-width: 0; }
+.legal-layout { min-height: 100dvh; background: var(--background); }
+.legal-inner { max-width: 860px; margin-inline: auto; padding: 32px; }
+.legal-header { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 16px; align-items: center; margin-bottom: 52px; }
+.legal-body { padding-block: 20px 60px; }
+.legal-title { text-align: left; margin-bottom: 48px; }
+.legal-title h1 { font-size: 36px; line-height: 1.3; }
+.legal-title > div { margin: 0 0 20px; }
+.legal-body p, .legal-body li { font-size: 15px; line-height: 1.9; }
+.legal-body h2 { font-size: 21px; line-height: 1.4; }
+@media (max-width: 767px) {
+  .marketnet-header { display: grid; grid-template-columns: minmax(0,1fr) auto; height: 68px; }
+  .marketnet-hero { min-height: 555px; }
+  .marketnet-hero-copy { padding-bottom: 130px; }
+  .marketnet-benefits-inner { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+  .marketnet-benefit { flex-direction: column; align-items: start; justify-content: start; gap: 10px; padding: 16px 0; }
+  .marketnet-benefit + .marketnet-benefit { border: none; }
+  .marketnet-benefit strong { font-size: 12px; line-height: 1.5; }
+  .marketnet-benefit span { display: none; }
+  .marketnet-hero-actions { display: grid; grid-template-columns: minmax(0,1fr); gap: 8px; justify-items: start; }
+  .marketnet-hero-actions > a:first-child { width: 100%; }
+  .marketnet-editorial { grid-template-columns: minmax(0,1fr); gap: 32px; }
+  .marketnet-editorial-photo { aspect-ratio: 4/3; }
+  .marketnet-final { padding-block: 48px; }
+  .marketnet-final h2 { font-size: 28px; }
+  .marketnet-final a { width: 100%; }
+  .marketnet-support { bottom: max(16px,env(safe-area-inset-bottom)); right: 16px; }
+  .auth-page { padding: 20px; }
+  .auth-brand { margin: 12px 0 28px; }
+  .auth-panel { padding: 26px 22px; min-height: 435px; }
+  .auth-heading h1 { font-size: 25px; }
+  .auth-heading { min-height: 105px; }
+  .onboarding-content { min-height: 450px; }
+  .onboarding-content h1 { font-size: 26px; }
+  .workspace-content { padding: 24px 20px; }
+  .legal-inner { padding: 24px 20px; }
+  .legal-header { margin-bottom: 32px; gap: 8px; }
+  .legal-header .marketnet-logo { font-size: 18px; }
+  .legal-header .marketnet-logo-mark { width: 24px; }
+  .legal-header a:last-child { font-size: 12px; padding-inline: 8px; }
+  .legal-title h1 { font-size: 29px; }
+  .legal-body p, .legal-body li { font-size: 14px; }
+}
+@media (max-width: 359px) { .marketnet-hero h1 { font-size: 40px; } .marketnet-hero h1 span { font-size: 32px; } .auth-panel { padding: 24px 18px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }

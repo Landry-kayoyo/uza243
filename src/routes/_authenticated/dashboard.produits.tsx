@@ -27,7 +27,9 @@ import { compressAndUpload } from "@/lib/upload";
 import { cloudinaryUploadSignature } from "@/lib/cloudinary.functions";
 
 export const Route = createFileRoute("/_authenticated/dashboard/produits")({
-  head: () => ({ meta: [{ title: "Produits — MarketNet" }, { name: "description", content: "Gérez vos produits." }, { property: "og:title", content: "Produits — MarketNet" }, { property: "og:description", content: "Gestion des produits MarketNet." }] }),
+  head: () => ({ meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },{ title: "Produits — MarketNet" }, { name: "description", content: "Gérez vos produits." }, { property: "og:title", content: "Produits — MarketNet" }, { property: "og:description", content: "Gestion des produits MarketNet." }] }),
   component: ProductsPage,
 });
 
